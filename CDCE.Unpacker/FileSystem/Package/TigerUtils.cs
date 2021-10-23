@@ -8,35 +8,34 @@ namespace CDCE.Unpacker
 {
     class TigerUtils
     {
-        private static Dictionary<UInt16, String> m_PackageIdsV8 = new Dictionary<UInt16, String>();
-        private static Dictionary<UInt64, String> m_LanguagesIds = new Dictionary<UInt64, String>();
-        public static Dictionary<Int32, String> m_LanguagesListV8 = new Dictionary<Int32, String>();
+        private static Dictionary<UInt16, String> m_PackageIds = new Dictionary<UInt16, String>();
+        public static Dictionary<UInt64, String> m_LanguagesIds = new Dictionary<UInt64, String>();
 
         public static void iInitPackageCodesV8()
         {
-            m_PackageIdsV8.Add(0, "_english.000.tiger");
-            m_PackageIdsV8.Add(1, "_french.000.tiger");
-            m_PackageIdsV8.Add(2, "_german.000.tiger");
-            m_PackageIdsV8.Add(3, "_italian.000.tiger");
-            m_PackageIdsV8.Add(4, "_latamspanish.000.tiger");
-            m_PackageIdsV8.Add(5, "_iberspanish.000.tiger");
-            m_PackageIdsV8.Add(6, "_japanese.000.tiger");
-            m_PackageIdsV8.Add(7, "_portuguese.000.tiger");
-            m_PackageIdsV8.Add(8, "_polish.000.tiger");
-            m_PackageIdsV8.Add(9, "_russian.000.tiger");
-            m_PackageIdsV8.Add(13, "_simplechinese.000.tiger");
-            m_PackageIdsV8.Add(14, "_arabic.000.tiger");
-            m_PackageIdsV8.Add(63, ".000.tiger");
-            m_PackageIdsV8.Add(127, ".001.tiger");
-            m_PackageIdsV8.Add(191, ".002.tiger");
-            m_PackageIdsV8.Add(255, ".003.tiger");
-            m_PackageIdsV8.Add(319, ".004.tiger");
-            m_PackageIdsV8.Add(383, ".005.tiger");
-            m_PackageIdsV8.Add(447, ".006.tiger");
-            m_PackageIdsV8.Add(511, ".007.tiger");
-            m_PackageIdsV8.Add(575, ".008.tiger");
-            m_PackageIdsV8.Add(639, ".009.tiger");
-            m_PackageIdsV8.Add(703, ".010.tiger");
+            m_PackageIds.Add(0, "_english.000.tiger");
+            m_PackageIds.Add(1, "_french.000.tiger");
+            m_PackageIds.Add(2, "_german.000.tiger");
+            m_PackageIds.Add(3, "_italian.000.tiger");
+            m_PackageIds.Add(4, "_latamspanish.000.tiger");
+            m_PackageIds.Add(5, "_iberspanish.000.tiger");
+            m_PackageIds.Add(6, "_japanese.000.tiger");
+            m_PackageIds.Add(7, "_portuguese.000.tiger");
+            m_PackageIds.Add(8, "_polish.000.tiger");
+            m_PackageIds.Add(9, "_russian.000.tiger");
+            m_PackageIds.Add(13, "_simplechinese.000.tiger");
+            m_PackageIds.Add(14, "_arabic.000.tiger");
+            m_PackageIds.Add(63, ".000.tiger");
+            m_PackageIds.Add(127, ".001.tiger");
+            m_PackageIds.Add(191, ".002.tiger");
+            m_PackageIds.Add(255, ".003.tiger");
+            m_PackageIds.Add(319, ".004.tiger");
+            m_PackageIds.Add(383, ".005.tiger");
+            m_PackageIds.Add(447, ".006.tiger");
+            m_PackageIds.Add(511, ".007.tiger");
+            m_PackageIds.Add(575, ".008.tiger");
+            m_PackageIds.Add(639, ".009.tiger");
+            m_PackageIds.Add(703, ".010.tiger");
         }
 
         public static void iInitLanguageCodesV3()
@@ -113,9 +112,9 @@ namespace CDCE.Unpacker
         public static String iGetPackageNameFromIDV8(UInt16 wTigerID)
         {
             String m_PackageName = null;
-            if (m_PackageIdsV8.ContainsKey(wTigerID))
+            if (m_PackageIds.ContainsKey(wTigerID))
             {
-                m_PackageIdsV8.TryGetValue(wTigerID, out m_PackageName);
+                m_PackageIds.TryGetValue(wTigerID, out m_PackageName);
             }
             else
             {

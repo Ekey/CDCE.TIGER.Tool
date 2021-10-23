@@ -53,14 +53,21 @@ namespace CDCE.Unpacker
 
                 String m_ArchiveFile = Path.GetDirectoryName(m_Archive) + @"\" + Path.GetFileName(m_Archive).Replace("000.tiger", "") + String.Format("{0:D3}.tiger", m_Entry.wTigerPart);
 
-                using (FileStream TArchiveStream = File.OpenRead(m_ArchiveFile))
+                if (File.Exists(m_ArchiveFile))
                 {
-                    TArchiveStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
-                    var lpBuffer = TArchiveStream.ReadBytes(m_Entry.dwDecompressedSize);
+                    using (FileStream TArchiveStream = File.OpenRead(m_ArchiveFile))
+                    {
+                        TArchiveStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
+                        var lpBuffer = TArchiveStream.ReadBytes(m_Entry.dwDecompressedSize);
 
-                    File.WriteAllBytes(@"\\?\" + m_FullPath, lpBuffer);
+                        File.WriteAllBytes(@"\\?\" + m_FullPath, lpBuffer);
 
-                    TArchiveStream.Dispose();
+                        TArchiveStream.Dispose();
+                    }
+                }
+                else
+                {
+                    Utils.iSetWarning("[SKIPPED]: " + m_FileName + " -> " + m_ArchiveFile + " not found");
                 }
             }
         }

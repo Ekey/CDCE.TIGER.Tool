@@ -11,7 +11,11 @@ namespace CDCE.Unpacker
 
         public static void iDoIt(FileStream TTigerStream, TigerHeader m_Header, String m_Archive, String m_DstFolder)
         {
+            m_EntryTable.Clear();
+            TTigerStream.Position -= 4;
+
             TigerUtils.iInitLanguageCodesV8();
+            TigerUtils.iInitPackageCodesV8();
             String m_BaseName = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(m_Archive));
 
             Int32 dwUnknown = TTigerStream.ReadInt32(); // 65535
@@ -23,10 +27,9 @@ namespace CDCE.Unpacker
                 Int32 dwFlag = TTigerStream.ReadInt32(); // 0, 1
                 String m_Language = Encoding.ASCII.GetString(TTigerStream.ReadBytes(16)).TrimEnd('\0');
 
-                TigerUtils.m_LanguagesListV8.Add(dwLanguageCode, m_Language);
+                //TigerUtils.m_LanguagesIds.Add((UInt64)dwLanguageCode, m_Language);
             }
 
-            m_EntryTable.Clear();
             var lpTable = TTigerStream.ReadBytes(m_Header.dwTotalFiles * 24);
             using (var TMemoryReader = new MemoryStream(lpTable))
             {
@@ -65,14 +68,21 @@ namespace CDCE.Unpacker
 
                 String m_ArchiveFile = Path.GetDirectoryName(m_Archive) + @"\" + m_BaseName + TigerUtils.iGetPackageNameFromIDV8(m_Entry.wTigerPart);
 
-                using (FileStream TArchiveStream = File.OpenRead(m_ArchiveFile))
+                if (File.Exists(m_ArchiveFile))
                 {
-                    TArchiveStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
-                    var lpBuffer = TArchiveStream.ReadBytes(m_Entry.dwDecompressedSize);
+                    using (FileStream TArchiveStream = File.OpenRead(m_ArchiveFile))
+                    {
+                        TArchiveStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
+                        var lpBuffer = TArchiveStream.ReadBytes(m_Entry.dwDecompressedSize);
 
-                    File.WriteAllBytes(@"\\?\" + m_FullPath, lpBuffer);
+                        File.WriteAllBytes(@"\\?\" + m_FullPath, lpBuffer);
 
-                    TArchiveStream.Dispose();
+                        TArchiveStream.Dispose();
+                    }
+                }
+                else
+                {
+                    Utils.iSetWarning("[SKIPPED]: " + m_FileName + " -> " + m_ArchiveFile + " not found");
                 }
             }
         }

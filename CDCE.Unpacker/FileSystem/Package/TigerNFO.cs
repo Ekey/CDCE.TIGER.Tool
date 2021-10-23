@@ -7,6 +7,11 @@ namespace CDCE.Unpacker
     {
         public static UInt32 iGetBapFromFile(String m_NFOFile)
         {
+            if (!File.Exists(m_NFOFile))
+            {
+                throw new Exception("[ERROR]: Unable to read NFO file -> " + m_NFOFile + " <- does not exist");
+            }
+
             StreamReader TNfoReader = new StreamReader(m_NFOFile);
             String m_Line = TNfoReader.ReadLine();
             TNfoReader.Dispose();
