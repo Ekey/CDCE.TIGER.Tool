@@ -26,6 +26,8 @@ Tool for dump DRM resources
 | Rise of the Tomb Raider | [here](https://store.steampowered.com/app/391220) | [here](https://steamdb.info/app/391220) |
 | Shadow of the Tomb Raider | [here](https://store.steampowered.com/app/750920) | [here](https://steamdb.info/app/750920) |
 | Lara Croft and the Temple of Osiris | [here](https://store.steampowered.com/app/289690) | [here](https://steamdb.info/app/289690) |
+| Marvel's Avengers | [here](https://store.steampowered.com/app/997070) | [here](https://steamdb.info/app/997070) |
+| Marvel's Avengers Beta | [here](https://store.steampowered.com/app/1358820) | [here](https://steamdb.info/app/1358820) |
 
 # Thanks
 [alphaZomega](https://github.com/alphazolam) - for testing :)
