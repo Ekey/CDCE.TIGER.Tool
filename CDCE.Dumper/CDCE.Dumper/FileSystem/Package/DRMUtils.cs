@@ -5,6 +5,8 @@ namespace CDCE.Dumper
 {
     class DRMUtils
     {
+        private static Dictionary<UInt16, String> m_PackageCodes = new Dictionary<UInt16, String>();
+
         public static String iGetTigerArchiveByIDV22(UInt16 wTigerID, UInt16 wTigerPart)
         {
             if (wTigerID == 0 || wTigerID == 1) { return String.Format("bigfile.{0:D3}.tiger", wTigerPart); }
@@ -62,6 +64,48 @@ namespace CDCE.Dumper
             else { throw new Exception("[ERROR]: Unable to determinate TIGER id -> " + wTigerID.ToString()); }
         }
 
+        public static void iInitPackageCodesV24()
+        {
+            m_PackageCodes.Add(16, "_ultra.000.tiger");
+            m_PackageCodes.Add(63, ".000.tiger");
+            m_PackageCodes.Add(80, "_ultra.001.tiger");
+            m_PackageCodes.Add(127, ".001.tiger");
+            m_PackageCodes.Add(144, "_ultra.002.tiger");
+            m_PackageCodes.Add(191, ".002.tiger");
+            m_PackageCodes.Add(208, "_ultra.003.tiger");
+            m_PackageCodes.Add(255, ".003.tiger");
+            m_PackageCodes.Add(272, "_ultra.004.tiger");
+            m_PackageCodes.Add(319, ".004.tiger");
+            m_PackageCodes.Add(336, "_ultra.005.tiger");
+            m_PackageCodes.Add(383, ".005.tiger");
+            m_PackageCodes.Add(400, "_ultra.006.tiger");
+            m_PackageCodes.Add(447, ".006.tiger");
+            m_PackageCodes.Add(511, ".007.tiger");
+            m_PackageCodes.Add(575, ".008.tiger");
+            m_PackageCodes.Add(639, ".009.tiger");
+            m_PackageCodes.Add(703, ".010.tiger");
+        }
+
+        public static String iGetTigerArchiveByIDV24(UInt16 wTigerID, UInt16 wTigerPart)
+        {
+            String m_PackageName = null;
+            if (m_PackageCodes.ContainsKey(wTigerID))
+            {
+                m_PackageCodes.TryGetValue(wTigerID, out m_PackageName);
+            }
+            else { throw new Exception("[ERROR]: Unknown TIGER ID -> " + wTigerID.ToString()); }
+
+            switch (wTigerPart)
+            {
+                case 1: m_PackageName = "bigfile" + m_PackageName; break;
+                case 10: m_PackageName = "bigfile.update1.000" + m_PackageName; break;
+                case 11: m_PackageName = "bigfile.update2.000" + m_PackageName; break;
+                default: throw new Exception("[ERROR]: Unable to determinate TIGER ID " + wTigerID.ToString() + " with " + wTigerPart.ToString() + " priority!");
+            }
+
+            return m_PackageName;
+        }
+
         public static String iGetTigerArchiveByID(Int32 dwVersion, DRMResEntry m_ResourceEntry)
         {
             if (dwVersion == 22) { return DRMUtils.iGetTigerArchiveByIDV22(m_ResourceEntry.wTigerID, m_ResourceEntry.wTigerPart); }
@@ -79,6 +123,7 @@ namespace CDCE.Dumper
             else if (dwResourceType == 4) { return String.Format("PSDResource\\Section_{0}.psdres", dwHash); }
             else if (dwResourceType == 5 && dwVersion == 22) { return String.Format("Texture\\Section_{0}.tr2pcd", dwHash); }
             else if (dwResourceType == 5 && dwVersion == 23) { return String.Format("Texture\\Section_{0}.tr11pcd", dwHash); }
+            else if (dwResourceType == 5 && dwVersion == 24) { return String.Format("Texture\\Section_{0}.mapcd", dwHash); }
             else if (dwResourceType == 6) { return String.Format("Sound\\Section_{0}.sound", dwHash); }
             else if (dwResourceType == 7) { return String.Format("DTPData\\Section_{0}.dtp", dwHash); }
             else if (dwResourceType == 8) { return String.Format("Script\\Section_{0}.script", dwHash); }
@@ -87,10 +132,13 @@ namespace CDCE.Dumper
             else if (dwResourceType == 11) { return String.Format("Object\\Section_{0}.object", dwHash); }
             else if (dwResourceType == 12 && dwVersion == 22) { return String.Format("RenderMesh\\Section_{0}.tr2mesh", dwHash); }
             else if (dwResourceType == 12 && dwVersion == 23) { return String.Format("RenderMesh\\Section_{0}.tr11mesh", dwHash); }
+            else if (dwResourceType == 12 && dwVersion == 24) { return String.Format("RenderMesh\\Section_{0}.mamesh", dwHash); }
             else if (dwResourceType == 13 && dwVersion == 22) { return String.Format("CollisionMesh\\Section_{0}.tr2cmesh", dwHash); }
             else if (dwResourceType == 13 && dwVersion == 23) { return String.Format("CollisionMesh\\Section_{0}.tr11cmesh", dwHash); }
+            else if (dwResourceType == 13 && dwVersion == 24) { return String.Format("CollisionMesh\\Section_{0}.macmesh", dwHash); }
             else if (dwResourceType == 14) { return String.Format("StreamGroupList\\Section_{0}.grplist", dwHash); }
             else if (dwResourceType == 15) { return String.Format("TriggerData\\Section_{0}.trigger", dwHash); }
+            else if (dwResourceType == 17 && dwVersion == 24) { return String.Format("Locale\\Section_{0}.malocale", dwHash); }
             else { return String.Format("Unknown\\Section_{0}.trunknown_{1}", dwHash, dwResourceType); }
         }
 

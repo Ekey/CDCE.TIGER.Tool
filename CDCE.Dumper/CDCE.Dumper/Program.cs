@@ -43,6 +43,7 @@ namespace CDCE.Dumper
             {
                 case 22: DRMFileV22.iDumpIt(TDRMReader, m_DrmFile, m_GameFolder, dwVersion); break;
                 case 23: DRMFileV23.iDumpIt(TDRMReader, m_DrmFile, m_GameFolder, dwVersion); break;
+                case 0x4D524443: DRMFileV24.iDumpIt(TDRMReader, m_DrmFile, m_GameFolder, dwVersion = 24); break;
             }
         }
     }
