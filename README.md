@@ -10,7 +10,6 @@ Tool for extract TIGER archives from games developed on CDC Engine
 | Lara Croft and the Temple of Osiris | [here](https://store.steampowered.com/app/289690) | [here](https://steamdb.info/app/289690) |
 | Marvel's Avengers | [here](https://store.steampowered.com/app/997070) | [here](https://steamdb.info/app/997070) |
 | Marvel's Avengers Beta | [here](https://store.steampowered.com/app/1358820) | [here](https://steamdb.info/app/1358820) |
-| Marvel's Guardians of the Galaxy | [here](https://store.steampowered.com/app/1088850) | [here](https://steamdb.info/app/1088850) |
 
 Note: For extract Marvel's Avengers TIGER files you need decrypt it first, tool you can get > [here](https://forum.xentax.com/viewtopic.php?p=166510#p166510)
 
