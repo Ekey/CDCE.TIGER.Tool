@@ -1,5 +1,5 @@
 # CDCE.Unpacker :see_no_evil:
-Tool for extract TIGER archives from games developed on CDC Engine
+Tool for extract TIGER archives from games developed on CDC Engine (Foundation Engine)
 
 # CDCE.Dumper :see_no_evil:
 Tool for dump DRM resources
