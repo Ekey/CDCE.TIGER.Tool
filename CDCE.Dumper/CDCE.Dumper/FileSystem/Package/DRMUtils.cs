@@ -21,6 +21,7 @@ namespace CDCE.Dumper
             else if (wTigerID == 64) { return String.Format("title.{0:D3}.tiger", wTigerPart); }
             else if (wTigerID == 65) { return String.Format("patch.{0:D3}.tiger", wTigerPart); }
             else if (wTigerID == 67) { return String.Format("patch2.{0:D3}.tiger", wTigerPart); }
+            else if (wTigerID == 69) { return String.Format("patch3.{0:D3}.tiger", wTigerPart); }
             else if (wTigerID == 150) { return String.Format("bigfile.dlc.mode.endurance.000.{0:D3}.tiger", wTigerPart); }
             else if (wTigerID == 175) { return String.Format("bigfile.dlc.story.babayaga.000.{0:D3}.tiger", wTigerPart); }
             else if (wTigerID == 200) { return String.Format("bigfile.dlc.mode.colddarkness.000.{0:D3}.tiger", wTigerPart); }

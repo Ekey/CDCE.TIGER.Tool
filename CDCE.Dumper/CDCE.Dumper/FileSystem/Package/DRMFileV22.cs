@@ -50,7 +50,6 @@ namespace CDCE.Dumper
                 {
                     String m_LinkedResource = TDRMReader.ReadString();
                     Utils.iSetInfo("[DRM INFO]: Linked Resource: " + m_LinkedResource);
-                    //File.AppendAllText(@"LinkedResources.log", m_LinkedResource + Environment.NewLine);
                 } while (TDRMReader.Position != dwLimitOffset);
             }
 
@@ -98,12 +97,14 @@ namespace CDCE.Dumper
                         UInt32 dwOffset = TResEntryReader.ReadUInt32();
                         Int32 dwSize = TResEntryReader.ReadInt32();
                         UInt32 dwHash = TResEntryReader.ReadUInt32();
+                        UInt32 dwTigerPart = (dwOffset >> 4) & 0x7F;
 
                         var TResEntry = new DRMResEntry
                         {
                             wUnknown1 = wUnknown1,
                             wUnknown2 = wUnknown2,
                             wTigerPart = (UInt16)(dwOffset & 0xF),
+                            wTigerID = (UInt16)(dwTigerPart),
                             dwOffset = dwOffset & 0xFFFFF800,
                             dwSize = dwSize,
                             dwHash = dwHash,
